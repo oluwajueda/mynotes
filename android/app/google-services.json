@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "520949532595",
+    "project_id": "mynotes-first-project-ibuild",
+    "storage_bucket": "mynotes-first-project-ibuild.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520949532595:android:fa5adae0148a0b024eedc6",
+        "android_client_info": {
+          "package_name": "com.ibuilddev.mynotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520949532595-6otnjis29g85rvdsk8nv30ej2otnsdq6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYqQRWniBExkLfMRw7IxX1CmcGurwfq9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520949532595-6otnjis29g85rvdsk8nv30ej2otnsdq6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
