@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '520949532595',
     projectId: 'mynotes-first-project-ibuild',
     storageBucket: 'mynotes-first-project-ibuild.appspot.com',
-    iosClientId: '520949532595-qolhvo99cg6initkdhm2t63pckfl72ol.apps.googleusercontent.com',
+    iosClientId:
+        '520949532595-qolhvo99cg6initkdhm2t63pckfl72ol.apps.googleusercontent.com',
     iosBundleId: 'com.ibuilddev.mynotes',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '520949532595',
     projectId: 'mynotes-first-project-ibuild',
     storageBucket: 'mynotes-first-project-ibuild.appspot.com',
-    iosClientId: '520949532595-qolhvo99cg6initkdhm2t63pckfl72ol.apps.googleusercontent.com',
+    iosClientId:
+        '520949532595-qolhvo99cg6initkdhm2t63pckfl72ol.apps.googleusercontent.com',
     iosBundleId: 'com.ibuilddev.mynotes',
   );
 }
