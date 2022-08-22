@@ -164,7 +164,7 @@ class NotesService {
     final db = _getDatabaseOrThrow();
     final deletedCount = await db.delete(
       noteTable,
-      where: 'id ?',
+      where: 'id = ?',
       whereArgs: [id],
     );
 
