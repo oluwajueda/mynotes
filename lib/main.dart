@@ -5,6 +5,7 @@ import 'package:mynotes/service/auth/bloc/auth_bloc.dart';
 import 'package:mynotes/service/auth/bloc/auth_event.dart';
 import 'package:mynotes/service/auth/bloc/auth_state.dart';
 import 'package:mynotes/service/auth/firebase_auth_provider.dart';
+import 'package:mynotes/utilities/colors.dart';
 import 'package:mynotes/views/forgot_password_view.dart';
 import 'package:mynotes/views/login_view.dart';
 import 'package:mynotes/views/notes/create_update_note_view.dart';
@@ -21,7 +22,7 @@ void main() {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: backgroundColor,
       ),
       home: BlocProvider<AuthBloc>(
         create: (context) => AuthBloc(FirebaseAuthProvider()),

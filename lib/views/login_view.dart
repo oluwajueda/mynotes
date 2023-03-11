@@ -6,9 +6,11 @@ import 'package:mynotes/service/auth/auth_service.dart';
 import 'package:mynotes/service/auth/bloc/auth_bloc.dart';
 import 'package:mynotes/service/auth/bloc/auth_event.dart';
 import 'package:mynotes/service/auth/bloc/auth_state.dart';
+import 'package:mynotes/utilities/colors.dart';
 import 'package:mynotes/utilities/dialogs/error_dialog.dart';
 import 'package:mynotes/utilities/dialogs/loading_dialog.dart';
 import 'package:mynotes/utilities/show_error_dialog.dart';
+import 'package:mynotes/widgets.dart/text_input_field.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -52,41 +54,101 @@ class _LoginViewState extends State<LoginView> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text('Login')),
+        backgroundColor: backgroundColor,
+        appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            title: const Text(
+              'Login',
+              style: TextStyle(color: Colors.black),
+            )),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
               const Text(
-                  'Please log in to your account in order to interact with and create notes!'),
-              TextField(
-                controller: _email,
-                enableSuggestions: false,
-                autocorrect: false,
-                keyboardType: TextInputType.emailAddress,
-                decoration:
-                    const InputDecoration(hintText: 'Enter your email here'),
+                'Please log in to your account in order to interact with and create notes!',
+                style: TextStyle(color: textColor),
               ),
-              TextField(
-                controller: _password,
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration:
-                    const InputDecoration(hintText: 'Enter your password here'),
+              const SizedBox(
+                height: 30,
+              ),
+              TextFieldInput(
+                textEditingController: _email,
+                hintText: "Enter your email here",
+                textInputType: TextInputType.emailAddress,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              TextFieldInput(
+                textEditingController: _password,
+                hintText: "Enter your password",
+                textInputType: TextInputType.text,
+                isPass: true,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              InkWell(
+                onTap: () async {
+                  final email = _email.text;
+                  final password = _password.text;
+                  context.read<AuthBloc>().add(
+                        AuthEventLogin(
+                          email,
+                          password,
+                        ),
+                      );
+                },
+                child: Container(
+                  // ignore: sort_child_properties_last
+                  child: const Text(
+                    "Log in",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  decoration: const ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(4),
+                        ),
+                      ),
+                      color: buttonColor),
+                ),
               ),
               TextButton(
-                  onPressed: () async {
-                    final email = _email.text;
-                    final password = _password.text;
-                    context.read<AuthBloc>().add(
-                          AuthEventLogin(
-                            email,
-                            password,
-                          ),
-                        );
-                  },
-                  //   try {
+                  onPressed: () => {
+                        context.read<AuthBloc>().add(
+                              const AuthEventForgotPassword(),
+                            ),
+                      },
+                  child: const Text(
+                    'I forgot my password',
+                    style: TextStyle(color: textColor),
+                  )),
+              TextButton(
+                  onPressed: () => {
+                        context.read<AuthBloc>().add(
+                              const AuthEventShouldRegister(),
+                            ),
+                      },
+                  child: const Text(
+                    'Not registered yet? Register here! ',
+                    style: TextStyle(color: textColor),
+                  ))
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+ //   try {
 
                   //     await AuthService.firebase().login(
                   //       email: email,
@@ -121,25 +183,3 @@ class _LoginViewState extends State<LoginView> {
                   //     );
                   //   }
                   // },
-                  child: const Text('Login')),
-              TextButton(
-                  onPressed: () => {
-                        context.read<AuthBloc>().add(
-                              const AuthEventForgotPassword(),
-                            ),
-                      },
-                  child: const Text('I forgot my password')),
-              TextButton(
-                  onPressed: () => {
-                        context.read<AuthBloc>().add(
-                              const AuthEventShouldRegister(),
-                            ),
-                      },
-                  child: const Text('Not registered yet? Register here! '))
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
