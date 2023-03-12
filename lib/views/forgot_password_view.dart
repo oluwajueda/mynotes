@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mynotes/service/auth/bloc/auth_bloc.dart';
 import 'package:mynotes/service/auth/bloc/auth_event.dart';
 import 'package:mynotes/service/auth/bloc/auth_state.dart';
+import 'package:mynotes/utilities/colors.dart';
 import 'package:mynotes/utilities/dialogs/error_dialog.dart';
 import 'package:mynotes/utilities/dialogs/password_reset_email_sent_dialog.dart';
 
@@ -50,20 +51,33 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
       },
       child: Scaffold(
           appBar: AppBar(
-            title: const Text('Forgot password'),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            title: const Text(
+              'Forgot password',
+              style: TextStyle(color: Colors.black),
+            ),
           ),
           body: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(children: [
                 const Text(
-                    'If you forgot your password, simply enter your email and we will send you a password link'),
+                    'If you forgot your password, simply enter your email and we will send you a password link',
+                    style: TextStyle(color: textColor)),
+                SizedBox(
+                  height: 30,
+                ),
                 TextField(
                   keyboardType: TextInputType.emailAddress,
                   autocorrect: false,
                   autofocus: true,
                   controller: _controller,
-                  decoration:
-                      const InputDecoration(hintText: 'Your email address...'),
+                  decoration: const InputDecoration(
+                      hintText: 'Your email address...',
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: buttonColor)),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: buttonColor))),
                 ),
                 TextButton(
                   onPressed: () {
@@ -72,7 +86,12 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                           AuthEventForgotPassword(email: email),
                         );
                   },
-                  child: const Text('send me password reset link'),
+                  child: const Text(
+                    'send me password reset link',
+                    style: TextStyle(
+                      color: Color.fromRGBO(215, 60, 16, 1),
+                    ),
+                  ),
                 ),
                 TextButton(
                   onPressed: () {
@@ -80,7 +99,10 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                           const AuthEventLogOut(),
                         );
                   },
-                  child: const Text('Back to login page'),
+                  child: const Text(
+                    'Back to login page',
+                    style: TextStyle(color: textColor),
+                  ),
                 )
               ]))),
     );

@@ -7,6 +7,7 @@ import 'package:mynotes/service/auth/bloc/auth_event.dart';
 import 'package:mynotes/service/auth/crud/notes_service.dart';
 import 'package:mynotes/service/cloud/cloud_note.dart';
 import 'package:mynotes/service/cloud/firebase_cloud_storage.dart';
+import 'package:mynotes/utilities/colors.dart';
 import 'package:mynotes/utilities/dialogs/logout_dialog.dart';
 import 'package:mynotes/views/notes/notes_list_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show ReadContext;
@@ -32,15 +33,24 @@ class _NoteViewState extends State<NoteView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Notes'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: const Text(
+          'Your Notes',
+          style: TextStyle(color: Colors.black),
+        ),
         actions: [
           IconButton(
             onPressed: () {
               Navigator.of(context).pushNamed(createOrUpdateNoteRoute);
             },
-            icon: const Icon(Icons.add),
+            icon: const Icon(
+              Icons.add,
+              color: buttonColor,
+            ),
           ),
           PopupMenuButton<MenuAction>(
+            color: buttonColor,
             onSelected: (value) async {
               switch (value) {
                 case MenuAction.logout:
