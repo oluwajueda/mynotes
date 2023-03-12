@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mynotes/utilities/colors.dart';
 
 typedef CloseDialog = void Function();
 
@@ -9,7 +10,9 @@ CloseDialog showLoadingDialog(
     content: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const CircularProgressIndicator(),
+        const CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation(buttonColor),
+        ),
         const SizedBox(height: 10.0),
         Text(text),
       ],
