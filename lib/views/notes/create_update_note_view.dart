@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mynotes/service/auth/auth_service.dart';
+import 'package:mynotes/utilities/colors.dart';
 import 'package:mynotes/utilities/dialogs/cannot_share_empty_note_dialog.dart';
 import 'package:mynotes/utilities/generics/get_arguments.dart';
 import 'package:mynotes/service/cloud/cloud_note.dart';
@@ -95,19 +96,39 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('New Note'), actions: [
-          IconButton(
-            onPressed: () async {
-              final text = _textController.text;
-              if (_note == null || text.isEmpty) {
-                await showCannotShareEmptyNoteDialog(context);
-              } else {
-                Share.share(text);
-              }
-            },
-            icon: const Icon(Icons.share),
-          )
-        ]),
+        appBar: AppBar(
+            leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: buttonColor,
+                )
+                //replace with our own icon data.
+                ),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            title: const Text(
+              'New Note',
+              style: TextStyle(color: Colors.black),
+            ),
+            actions: [
+              IconButton(
+                onPressed: () async {
+                  final text = _textController.text;
+                  if (_note == null || text.isEmpty) {
+                    await showCannotShareEmptyNoteDialog(context);
+                  } else {
+                    Share.share(text);
+                  }
+                },
+                icon: const Icon(
+                  Icons.share,
+                  color: buttonColor,
+                ),
+              )
+            ]),
         body: FutureBuilder(
             future: createOrGetExistingNote(context),
             builder: (context, snapshot) {
