@@ -4,6 +4,7 @@ import 'package:mynotes/constants/routes.dart';
 import 'package:mynotes/service/auth/auth_service.dart';
 import 'package:mynotes/service/auth/bloc/auth_bloc.dart';
 import 'package:mynotes/service/auth/bloc/auth_event.dart';
+import 'package:mynotes/utilities/colors.dart';
 
 class VerifyEmailView extends StatefulWidget {
   const VerifyEmailView({Key? key}) : super(key: key);
@@ -26,10 +27,23 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
       ),
       body: Column(
         children: [
-          const Text(
-              "We've sent you an emai verification. Please open it to verify your account."),
-          const Text(
-              "If you haven't received a verification email yet, press the button below"),
+          SizedBox(
+            height: 30,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: const Text(
+              "We've sent you an emai verification. Please open it to verify your account.",
+              style: TextStyle(color: textColor),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: const Text(
+              "If you haven't received a verification email yet, press the button below",
+              style: TextStyle(color: textColor),
+            ),
+          ),
           TextButton(
             onPressed: () {
               // await AuthService.firebase().sendEmailVerification();
@@ -38,7 +52,10 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                     const AuthEventSendEmailVerification(),
                   );
             },
-            child: const Text('Send email verification'),
+            child: const Text('Send email verification',
+                style: TextStyle(
+                  color: Color.fromRGBO(215, 60, 16, 1),
+                )),
           ),
           TextButton(
               onPressed: () {
@@ -52,7 +69,10 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                       const AuthEventLogOut(),
                     );
               },
-              child: const Text('Restart'))
+              child: const Text(
+                'Restart',
+                style: TextStyle(color: textColor),
+              ))
         ],
       ),
     );
