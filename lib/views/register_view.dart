@@ -7,9 +7,11 @@ import 'package:mynotes/service/auth/auth_service.dart';
 import 'package:mynotes/service/auth/bloc/auth_bloc.dart';
 import 'package:mynotes/service/auth/bloc/auth_event.dart';
 import 'package:mynotes/service/auth/bloc/auth_state.dart';
+import 'package:mynotes/utilities/colors.dart';
 import 'package:mynotes/utilities/dialogs/error_dialog.dart';
 
 import 'package:mynotes/utilities/show_error_dialog.dart';
+import 'package:mynotes/widgets.dart/text_input_field.dart';
 
 class Registerview extends StatefulWidget {
   const Registerview({Key? key}) : super(key: key);
@@ -55,68 +57,75 @@ class _RegisterviewState extends State<Registerview> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Register'),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: const Text(
+            'Register',
+            style: TextStyle(color: Colors.black),
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Enter your email and password to see your notes!'),
-              TextField(
-                controller: _email,
-                enableSuggestions: false,
-                autocorrect: false,
-                autofocus: true,
-                keyboardType: TextInputType.emailAddress,
-                decoration:
-                    const InputDecoration(hintText: 'Enter your email here'),
+              const Text(
+                'Enter your email and password to see your notes!',
+                style: TextStyle(color: textColor),
               ),
-              TextField(
-                controller: _password,
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration:
-                    const InputDecoration(hintText: 'Enter your password here'),
+              const SizedBox(
+                height: 30,
+              ),
+              TextFieldInput(
+                textEditingController: _email,
+                textInputType: TextInputType.emailAddress,
+                hintText: "Enter your email here",
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              TextFieldInput(
+                textEditingController: _password,
+                textInputType: TextInputType.text,
+                hintText: "Enter your password here",
+                isPass: true,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              InkWell(
+                onTap: () async {
+                  final email = _email.text;
+                  final password = _password.text;
+
+                  context.read<AuthBloc>().add(
+                        AuthEventRegister(
+                          email,
+                          password,
+                        ),
+                      );
+                },
+                child: Container(
+                  // ignore: sort_child_properties_last
+                  child: const Text(
+                    "Register",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  decoration: const ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(4),
+                        ),
+                      ),
+                      color: buttonColor),
+                ),
               ),
               Center(
                 child: Column(
                   children: [
-                    TextButton(
-                        onPressed: () async {
-                          final email = _email.text;
-                          final password = _password.text;
-
-                          context.read<AuthBloc>().add(
-                                AuthEventRegister(
-                                  email,
-                                  password,
-                                ),
-                              );
-
-                          // try {
-                          //   await AuthService.firebase().createUser(
-                          //     email: email,
-                          //     password: password,
-                          //   );
-                          //   AuthService.firebase().sendEmailVerification();
-                          //   Navigator.of(context).pushNamed(verifyEmailRoute);
-                          // } on WeakPasswordAuthException {
-                          //   await showErrorDialog(
-                          //     context,
-                          //     'Weak Password',
-                          //   );
-                          // } on EmailAlreadyInUseAuthException {
-                          //   await showErrorDialog(context, 'Email is already in use');
-                          // } on InvalidEmailAuthException {
-                          //   await showErrorDialog(
-                          //       context, 'This is an invalid email address');
-                          // } on GenericAuthException {
-                          //   await showErrorDialog(context, 'failed to register');
-                          // }
-                        },
-                        child: const Text('Register')),
                     TextButton(
                       onPressed: () {
                         // Navigator.of(context).pushNamedAndRemoveUntil(
@@ -127,7 +136,10 @@ class _RegisterviewState extends State<Registerview> {
                               const AuthEventLogOut(),
                             );
                       },
-                      child: const Text('Already registered? Login here!'),
+                      child: const Text(
+                        'Already registered? Login here!',
+                        style: TextStyle(color: textColor),
+                      ),
                     )
                   ],
                 ),

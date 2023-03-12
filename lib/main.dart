@@ -71,7 +71,7 @@ class HomePage extends StatelessWidget {
           return const Registerview();
         } else {
           return const Scaffold(
-            body: LoginView(),
+            body: Registerview(),
           );
         }
       },
