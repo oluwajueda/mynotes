@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mynotes/constants/routes.dart';
 import 'package:mynotes/service/auth/auth_exceptions.dart';
-import 'package:mynotes/service/auth/auth_service.dart';
 import 'package:mynotes/service/auth/bloc/auth_bloc.dart';
 import 'package:mynotes/service/auth/bloc/auth_event.dart';
 import 'package:mynotes/service/auth/bloc/auth_state.dart';
 import 'package:mynotes/utilities/colors.dart';
 import 'package:mynotes/utilities/dialogs/error_dialog.dart';
-import 'package:mynotes/utilities/dialogs/loading_dialog.dart';
-import 'package:mynotes/utilities/show_error_dialog.dart';
+
 import 'package:mynotes/widgets.dart/text_input_field.dart';
 
 class LoginView extends StatefulWidget {
